@@ -1,166 +1,76 @@
-
 <!doctype html>
-<html lang="id">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DIGIORA AI Studio</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<header class="top">
-  <b>DIGIORA <span>AI Studio</span></b>
-  <small>　Create. Educate. Inspire.</small>
-</header>
-
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101d3a"><title>DIGIORA AI Studio — Universal Prompt Generator</title>
+<style>
+:root{--pink:#e58fb2;--pink2:#f8dce8;--navy:#101d3a;--bg:#fff7fa;--ink:#263149;--muted:#69758a;--line:#eadce4;--white:#fff;--green:#17804b;--shadow:0 8px 28px #49233b0b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.top{background:var(--navy);color:white;padding:16px max(20px,calc((100% - 1180px)/2));display:flex;gap:18px;align-items:center;flex-wrap:wrap}.top b{font-size:20px}.top b span{color:#f2aeca}.top small{color:#e5eaf4}.wrap{max-width:1180px;margin:auto;padding:24px 18px 60px}.hero{background:linear-gradient(115deg,#101d3a,#344b7c);color:white;border-radius:24px;padding:32px;margin-bottom:28px}.pill{display:inline-block;background:#fff0f6;color:#92506e;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:800}.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:15px 0}.hero p{max-width:760px;color:#e8eaf4}.section-title{color:var(--navy);font-size:23px;margin:28px 0 14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.module{border:1px solid var(--line);background:white;border-radius:18px;padding:20px;text-align:left;cursor:pointer;box-shadow:var(--shadow);color:var(--ink);min-height:140px}.module:hover,.module:focus{border-color:var(--pink);outline:2px solid #e58fb233}.module .emoji{font-size:28px}.module h3{margin:10px 0 4px;color:var(--navy)}.module p{margin:0;color:var(--muted);font-size:13px}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:24px;margin-top:18px;box-shadow:var(--shadow)}.hidden{display:none!important}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:750;cursor:pointer;background:var(--pink);color:#2a1830}.btn.secondary{background:var(--navy);color:white}.btn.light{background:#fff0f6;color:#8c4566;border:1px solid #f0d0df}.btn:disabled{opacity:.6;cursor:wait}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.field{min-width:0}.field.full{grid-column:1/-1}.field label,.field legend{display:block;font-weight:750;color:var(--navy);margin-bottom:6px}.field input:not([type=checkbox]):not([type=radio]),.field select,.field textarea{width:100%;border:1px solid #d9d5dc;border-radius:12px;padding:12px 13px;background:#fff;color:var(--ink);font:inherit;min-height:46px}.field textarea{min-height:94px;resize:vertical}.choices{display:flex;gap:9px;flex-wrap:wrap}.choice{display:flex;align-items:flex-start;gap:7px;background:#fff8fb;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-weight:500!important;margin:0!important}.choice input{margin-top:4px;accent-color:#b54f7b}.hint{color:var(--muted);font-size:12px;margin-top:5px}.required{color:#bd426f}.notice{background:#fff8e9;border-left:4px solid #e2bb65;padding:12px 14px;border-radius:8px;color:#5e4b27;font-size:13px;margin-top:14px}.result{white-space:pre-wrap;min-height:380px;width:100%;border:1px solid var(--line);border-radius:14px;padding:18px;background:#fffafd;color:#29334a;font:14px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}.history-item,.project{padding:13px;border:1px solid var(--line);border-radius:12px;margin:9px 0;background:#fff}.muted{color:var(--muted);font-size:13px}.footer{text-align:center;color:#8a8290;font-size:12px;margin-top:28px}.status{font-size:13px;color:var(--green);font-weight:700}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.subhead{font-size:17px;color:var(--navy);margin:22px 0 12px}.divider{border:0;border-top:1px solid var(--line);margin:20px 0}
+@media(max-width:680px){.wrap{padding:14px 12px 40px}.hero{padding:23px}.panel{padding:17px}.grid,.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.top{padding:14px 16px}.top small{font-size:12px}}
+</style></head><body>
+<header class="top"><b>DIGIORA <span>AI Studio</span></b><small>Create. Educate. Inspire.</small></header>
 <main class="wrap">
-<section id="home">
-<div class="hero">
-  <span class="pill">EDUCATIONAL CREATIVE WORKSPACE</span>
-  <h1>Ubah ide menjadi produk edukasi.</h1>
-  <p>Buat draft worksheet, activity book, coloring book, komik, busy book, catatan belajar, LKPD, dan produk edukasi kustom.</p>
-  <button onclick="document.querySelector('#modules').scrollIntoView({behavior:'smooth'})">Mulai Membuat</button>
-</div>
-
-<h2 id="modules" style="color:var(--navy);margin-top:28px">Pilih Studio Kreatif</h2>
-<div class="grid" id="modulesGrid"></div>
-
-<div class="panel">
-<h2 style="color:var(--navy)">Proyek Saya</h2>
-<p class="muted">Proyek tersimpan di browser/perangkat ini.</p>
-<div id="projects" class="projects"></div>
-<button class="light" onclick="backup()">Cadangkan Proyek (JSON)</button>
-<div class="notice">Draft dibuat dengan bantuan Gemini AI. Penyimpanan proyek memakai browser ini. Unduh cadangan sebelum menghapus data browser atau pindah perangkat.</div>
-</div>
-</section>
-
-<section id="formView" class="hidden">
-<button class="light no-print" onclick="home()">← Dashboard</button>
-<div class="panel">
-<span class="pill" id="modPill"></span>
-<h2 style="color:var(--navy)">Buat produk baru</h2>
-<div class="form">
-
-<div class="field full">
-<label>Judul / Topik *</label>
-<input id="title" placeholder="Contoh: Petualangan Mengenal Hewan">
-</div>
-
-<div class="field">
-<label>Target usia / kelas</label>
-<select id="age">
-<option>PAUD / TK (4–6 tahun)</option>
-<option>SD Kelas 1–3</option>
-<option>SD Kelas 4–6</option>
-<option>SMP</option>
-<option>SMA / Umum</option>
-</select>
-</div>
-
-<div class="field">
-<label>Bahasa</label>
-<select id="lang">
-<option>Bahasa Indonesia</option>
-<option>English</option>
-</select>
-</div>
-
-<div class="field">
-<label>Jumlah halaman (1–30)</label>
-<input id="count" type="number" min="1" max="30" value="5">
-</div>
-
-<div class="field">
-<label>Gaya visual</label>
-<select id="style">
-<option>Bright Kids Color Pop</option>
-<option>Cute Watercolor Storybook</option>
-<option>3D Cartoon Kids</option>
-<option>Kawaii Chibi</option>
-<option>Minimalis Edukatif</option>
-<option>Hitam Putih Line Art</option>
-</select>
-</div>
-
-<div class="field">
-<label>Kurikulum</label>
-<select id="curr">
-<option>Kurikulum Merdeka</option>
-<option>K13</option>
-<option>Cambridge</option>
-<option>Umum / Tidak ditentukan</option>
-</select>
-</div>
-
-<div class="field">
-<label>Kesulitan</label>
-<select id="level">
-<option>Mudah</option>
-<option>Sedang</option>
-<option>Menantang</option>
-</select>
-</div>
-
-<div class="field full">
-<label>Tujuan pembelajaran</label>
-<textarea id="objective" placeholder="Apa yang diharapkan dapat dipelajari?"></textarea>
-</div>
-
-<div class="field full">
-<label>Instruksi tambahan</label>
-<textarea id="extra" placeholder="Tema, jenis aktivitas, karakter, ketentuan khusus..."></textarea>
-</div>
-
-</div>
-
-<div class="actions">
-<button id="generateBtn" onclick="generate()">Buat dengan Gemini AI</button>
-<button class="light" onclick="home()">Batal</button>
-</div>
-
-<div class="notice">Pembuatan teks menggunakan Gemini AI melalui backend Netlify. Ilustrasi/gambar AI belum diaktifkan.</div>
-</div>
-</section>
-
-<section id="editView" class="hidden">
-<div class="actions no-print">
-<button class="light" onclick="home()">← Dashboard</button>
-<button class="light" onclick="addPage()">＋ Halaman</button>
-<button class="light" onclick="duplicatePage()">Duplikasi</button>
-<button class="light" onclick="deletePage()">Hapus</button>
-<button class="dark" onclick="save()">Simpan</button>
-<button onclick="print()">Cetak / PDF</button>
-<button class="light" onclick="downloadPage()">Unduh halaman HTML</button>
-</div>
-
-<h2 id="editHeading" style="color:var(--navy)"></h2>
-
-<div class="editor">
-<aside class="pages no-print">
-<b>Halaman</b>
-<div id="pageList"></div>
-</aside>
-
-<div class="stage">
-<article class="paper" id="paper"></article>
-</div>
-
-<aside class="inspect no-print">
-<b>Edit konten</b>
-<label>Judul halaman</label>
-<input id="pTitle" oninput="update('title',this.value)">
-<label>Isi / penjelasan</label>
-<textarea id="pBody" oninput="update('body',this.value)"></textarea>
-<label>Instruksi aktivitas</label>
-<textarea id="pTask" oninput="update('task',this.value)"></textarea>
-<small class="muted">Perubahan terlihat langsung. Tekan Simpan untuk menyimpan proyek.</small>
-</aside>
-</div>
-</section>
-
-<div class="footer">DIGIORA AI Studio</div>
-</main>
-
-<script src="js/app.js"></script>
-</body>
-</html>
+<section id="home"><div class="hero"><span class="pill">UNIVERSAL PROMPT GENERATOR</span><h1>Ubah ide menjadi prompt edukasi yang siap digunakan.</h1><p>Pilih studio kreatif, isi spesifikasi, lalu hasilkan prompt terstruktur yang dapat digunakan di ChatGPT, Gemini, Claude, Copilot, DeepSeek, maupun platform AI lain yang mendukung instruksi teks.</p><button class="btn" onclick="document.getElementById('modules').scrollIntoView({behavior:'smooth'})">Mulai Membuat Prompt</button></div>
+<h2 class="section-title" id="modules">Pilih Studio Kreatif</h2><div class="grid" id="modulesGrid"></div>
+<section class="panel"><div class="toolbar"><div><h2 style="margin:0;color:var(--navy)">Riwayat Prompt</h2><p class="muted">Disimpan di browser/perangkat ini.</p></div><button class="btn light" onclick="exportHistory()">Unduh Cadangan</button></div><div id="history"></div><div class="notice">Gemini hanya digunakan sebagai mesin penyusun prompt di belakang DIGIORA. Prompt yang dihasilkan bersifat universal dan tidak dikunci untuk satu platform AI.</div></section></section>
+<section id="formView" class="hidden"><button class="btn light" onclick="goHome()">← Dashboard</button><div class="panel"><span class="pill" id="modulePill"></span><h2 id="formTitle" style="color:var(--navy);margin:14px 0 4px">Susun kebutuhan prompt</h2><p class="muted" id="formDesc"></p><form id="moduleForm"><div id="fields" class="formgrid"></div><div class="actions"><button class="btn" id="generateBtn" type="submit">Buat Prompt Universal</button><button class="btn light" type="button" onclick="goHome()">Batal</button></div></form><div class="notice">Unggahan yang dipilih akan dicantumkan sebagai referensi dalam prompt. Pastikan file tersebut juga dilampirkan saat menjalankan prompt di platform AI tujuan.</div></div></section>
+<section id="resultView" class="hidden"><button class="btn light" onclick="goHome()">← Dashboard</button><div class="panel"><div class="toolbar"><div><span class="pill">HASIL PROMPT</span><h2 id="resultTitle" style="color:var(--navy);margin:10px 0 0"></h2></div><span class="status" id="resultStatus"></span></div><p class="muted">Salin prompt ini dan tempelkan ke platform AI pilihanmu. Kamu juga dapat mengeditnya sebelum digunakan.</p><textarea id="promptResult" class="result" spellcheck="false" aria-label="Hasil prompt"></textarea><div class="actions"><button class="btn" onclick="copyPrompt()">Salin Prompt</button><button class="btn secondary" onclick="downloadPrompt()">Unduh TXT</button><button class="btn light" onclick="savePrompt()">Simpan ke Riwayat</button></div></div></section>
+<div class="footer">DIGIORA AI Studio · Create. Educate. Inspire.</div></main>
+<script>
+const modules=[
+{id:'worksheet',name:'Worksheet Generator',emoji:'📝',desc:'Lembar kerja dengan aktivitas terarah dan variasi per halaman.'},
+{id:'activity',name:'Activity Book Creator',emoji:'🧩',desc:'Buku aktivitas multi-halaman dengan tema dan tingkat kesulitan.'},
+{id:'coloring',name:'Coloring Book Creator',emoji:'🎨',desc:'Buku mewarnai dengan format outline dan komposisi terarah.'},
+{id:'comic',name:'Komik Edukasi Creator',emoji:'💬',desc:'Prompt storyboard, panel, tokoh, dan narasi edukatif.'},
+{id:'busy',name:'Busy Book Creator',emoji:'🧸',desc:'Aktivitas motorik atau pola fisik dan digital.'},
+{id:'notes',name:'Catatan Belajar Creator',emoji:'📚',desc:'Catatan visual, rangkuman, dan materi berbasis sumber.'},
+{id:'lkpd',name:'LKPD Generator',emoji:'📋',desc:'Lembar kerja peserta didik sesuai mapel, fase, dan tujuan.'},
+{id:'custom',name:'Custom Product Studio',emoji:'✨',desc:'Rancang prompt produk edukasi khusus sesuai idemu.'}
+];
+const curriculum=['Kurikulum Merdeka','Kurikulum Merdeka dengan Pendekatan Pembelajaran Mendalam','Kurikulum 2013 (K13)','Kurikulum Cambridge','Kurikulum IB (International Baccalaureate)','Lainnya','Tidak ditentukan'];
+const ages=['Balita (1–4 tahun)','PAUD/TK (4–6 tahun)','SD Kelas 1–3 (6–9 tahun)','SD Kelas 4–6 (9–12 tahun)','SMP (12–15 tahun)','SMA/SMK (15–18 tahun)','Mahasiswa/Umum/Dewasa','Lainnya'];
+const styles=['Bright Kids Color Pop','Cute Watercolor Animal','3D Chibi','Cute Flash Storybook','3D Cartoon Kids Storybook','Kawaii Anime Chibi','Crochet Amigurumi','Paper Quilling Illustration','3D Clay Chibi Faceless','AI yang memilih','Lainnya'];
+const chars=['AI yang merancang sesuai tema','Upload gambar referensi sendiri','Tanpa maskot','Lainnya'];
+const sizes=['A4 Portrait','A4 Landscape','Persegi','Lainnya'];const langs=['Bahasa Indonesia','Bahasa Inggris','Lainnya'];
+const globalFields=[
+{key:'curriculum',label:'Kurikulum',type:'select',options:curriculum,required:true,other:'curriculumOther'},
+{key:'age',label:'Target usia / jenjang pendidikan',type:'select',options:ages,required:true,other:'ageOther'},
+{key:'character',label:'Karakter / maskot',type:'select',options:chars,required:true,other:'characterOther'},
+{key:'visualStyle',label:'Gaya visual',type:'select',options:styles,required:true,other:'visualOther'},
+{key:'size',label:'Ukuran produk',type:'select',options:sizes,required:true,other:'sizeOther'},
+{key:'language',label:'Bahasa teks pada produk',type:'select',options:langs,required:true,other:'languageOther'},
+{key:'elements',label:'Elemen wajib / catatan khusus',type:'textarea',full:true,placeholder:'Opsional. Contoh: logo sekolah, kolom identitas, setiap halaman memiliki satu hewan dan elemen dekoratif kecil.'},
+{key:'files',label:'Unggah materi atau referensi (opsional)',type:'file',full:true,multiple:true}
+];
+const specs={
+worksheet:[{key:'topic',label:'Tema / topik',type:'text',required:true,full:true},{key:'objective',label:'Tujuan pembelajaran',type:'textarea',full:true},{key:'pages',label:'Jumlah halaman isi (maksimal 20)',type:'number',min:1,max:20,required:true},{key:'cover',label:'Halaman cover',type:'radio',options:['Kolom tambahan','Tidak ada tambahan'],other:'coverExtra'},{key:'activitiesPerPage',label:'Aktivitas per halaman',type:'radio',options:['1 aktivitas','2 aktivitas (maksimal)']},{key:'activityTypes',label:'Jenis aktivitas',type:'checks',options:['Tracing','Mewarnai','Flashcard','Mencocokkan','Berhitung','Biarkan AI yang memilih','Lainnya (bebas)'],other:'activityOther',full:true},{key:'variation',label:'Variasi aktivitas antarhalaman',type:'radio',options:['Bervariasi','Sama tiap halaman']},{key:'identity',label:'Kotak identitas',type:'radio',options:['Ya','Tidak']}],
+activity:[{key:'topic',label:'Tema utama (ditentukan pembuat)',type:'text',required:true,full:true},{key:'objective',label:'Tujuan pembelajaran',type:'textarea',full:true},{key:'pages',label:'Jumlah halaman isi (cover tidak dihitung)',type:'number',min:1,max:30,required:true},{key:'cover',label:'Cover',type:'radio',options:['Ya, tambahkan','Tidak perlu']},{key:'activities',label:'Ragam aktivitas',type:'checks',options:['Maze','Sambung titik','Tracing','Cari kata','Cari perbedaan','Mewarnai','Kuis sederhana','Mencocokkan','Campuran'],full:true},{key:'themeMode',label:'Tema buku',type:'radio',options:['Satu tema untuk seluruh buku','Tema berbeda tiap halaman'],other:'pageThemes',otherLabel:'Tuliskan tema untuk setiap halaman'},{key:'difficultyMode',label:'Tingkat kesulitan',type:'radio',options:['Bertahap','Seragam']},{key:'variation',label:'Variasi aktivitas antarhalaman',type:'radio',options:['Bervariasi','Sama']},{key:'notes',label:'Catatan khusus',type:'textarea',full:true}],
+coloring:[{key:'topic',label:'Tema',type:'text',required:true,full:true},{key:'objective',label:'Tujuan pembelajaran',type:'textarea',full:true},{key:'pages',label:'Jumlah halaman isi',type:'number',min:1,max:30,required:true},{key:'cover',label:'Cover',type:'radio',options:['Ya, tambahkan','Tidak perlu']},{key:'format',label:'Bentuk halaman mewarnai',type:'select',options:['Classic / Outline Murni','Trace & Color','Reference + Outline','Color by Number','Split Scene / Before-After','Mandala / Pattern Details','Coloring + Label','Lainnya'],other:'formatOther',full:true},{key:'complexity',label:'Kerumitan garis',type:'radio',options:['Sangat simpel (balita)','Sedang (SD)','Detail (remaja/dewasa)']},{key:'composition',label:'Komposisi',type:'radio',options:['1 objek besar per halaman','Adegan dengan beberapa objek']},{key:'border',label:'Border',type:'radio',options:['Dengan border','Tanpa border']},{key:'reference',label:'Contoh berwarna',type:'radio',options:['Murni outline hitam putih','Sertakan contoh berwarna sebagai referensi']},{key:'notes',label:'Catatan khusus',type:'textarea',full:true}],
+comic:[{key:'topic',label:'Tema komik',type:'text',required:true,full:true},{key:'objective',label:'Tujuan pembelajaran / pesan edukasi',type:'textarea',full:true},{key:'hasMaterial',label:'Punya materi sendiri?',type:'radio',options:['Ya, saya punya materi','Tidak']},{key:'pages',label:'Jumlah halaman komik (di luar cover)',type:'number',min:1,max:30,required:true},{key:'cover',label:'Cover',type:'radio',options:['Ya, tambahkan','Tidak perlu']},{key:'hero',label:'Tokoh utama (opsional)',type:'textarea',full:true},{key:'panels',label:'Jumlah panel per halaman',type:'select',options:['2 panel','3 panel','4 panel','5 panel','6 panel','Bervariasi sesuai cerita']},{key:'narration',label:'Gaya narasi',type:'radio',options:['Dialog penuh','Narasi + dialog','Tanpa teks (visual storytelling)']},{key:'notes',label:'Catatan khusus',type:'textarea',full:true}],
+busy:[{key:'topic',label:'Tema',type:'text',required:true,full:true},{key:'objective',label:'Tujuan pembelajaran',type:'textarea',full:true},{key:'pages',label:'Jumlah halaman aktivitas',type:'number',min:1,max:30,required:true},{key:'cover',label:'Cover',type:'radio',options:['Ya, tambahkan','Tidak perlu']},{key:'skills',label:'Keterampilan motorik',type:'checks',options:['Mengancing / menarik resleting','Menghitung dengan menempel','Mengenal bentuk','Mengikat tali','Menjodohkan dengan Velcro','Mengenal warna','Membuka-tutup flap','Lainnya'],other:'skillsOther',full:true},{key:'format',label:'Format busy book',type:'radio',options:['Pola / template fisik (felt/kain) untuk dibuat sendiri','Ilustrasi digital bergaya Busy Book'],full:true},{key:'notes',label:'Catatan khusus',type:'textarea',full:true}],
+notes:[{key:'topic',label:'Tema / mata pelajaran',type:'text',required:true,full:true},{key:'objective',label:'Tujuan pembelajaran',type:'textarea',full:true},{key:'pages',label:'Jumlah halaman isi',type:'number',min:1,max:30,required:true},{key:'cover',label:'Cover',type:'radio',options:['Ya, tambahkan','Tidak perlu']},{key:'source',label:'Sumber materi',type:'radio',options:['Saya lampirkan sendiri di chat AI','Minta AI mencarikan materinya'],full:true},{key:'subtopics',label:'Subtopik catatan (opsional)',type:'textarea',full:true},{key:'pageSplit',label:'Pembagian halaman',type:'radio',options:['1 halaman = 1 subtopik','Digabung sesuai kebutuhan']},{key:'elementsPerPage',label:'Elemen per halaman',type:'checks',options:['Ringkasan konsep / definisi','Contoh penerapan','Tips / mnemonic mudah ingat','Rumus / aturan','Tabel ringkasan','Latihan singkat / mini quiz','Lainnya'],other:'noteElementsOther',full:true},{key:'noteStyle',label:'Gaya visual catatan',type:'select',options:['Doodle Notes / Hand-Drawn Notes','Flat Illustration Cerah','Kawaii Infografis','Scrapbook / Washi Tapes Notes','Minimalis Akademik','AI yang memilih','Lainnya'],other:'noteStyleOther',full:true}],
+lkpd:[{key:'topic',label:'Tema',type:'text',required:true,full:true},{key:'objective',label:'Tujuan pembelajaran',type:'textarea',full:true},{key:'pages',label:'Jumlah halaman isi',type:'number',min:1,max:30,required:true},{key:'cover',label:'Cover',type:'radio',options:['Ya, tambahkan','Tidak perlu']},{key:'formType',label:'Bentuk LKPD',type:'select',options:['Observasi','Eksperimen','Eksplorasi','Berbasis gambar','Cerita bergambar','Mencocokkan','Menjodohkan','Pilihan ganda','Benar / Salah','Isian','Studi kasus','Investigasi','Pemecahan masalah (HOTS)','Berbasis proyek','Diskusi kelompok','Analisis data','Refleksi','Diagnostik','Pengayaan','Remedial','Campuran','Lainnya'],other:'formOther',full:true},{key:'subject',label:'Mata pelajaran',type:'text',required:true},{key:'phase',label:'Kelas / fase',type:'text',required:true},{key:'model',label:'Model pembelajaran',type:'select',options:['Tidak ditentukan','Discovery Learning','Problem-Based Learning (PBL)','Project-Based Learning (PjBL)','Pendekatan Saintifik','Inkuiri','Lainnya'],other:'modelOther'},{key:'assessment',label:'Rubrik / kunci jawaban',type:'checks',options:['Rubrik penilaian di lembar','Kunci jawaban teks terpisah untuk guru']},{key:'identity',label:'Kotak identitas siswa',type:'radio',options:['Ya, hanya di halaman pertama','Ya, di semua halaman','Tidak perlu']},{key:'notes',label:'Catatan khusus',type:'textarea',full:true}],
+custom:[{key:'productName',label:'Nama produk',type:'text',required:true,full:true},{key:'topic',label:'Tema',type:'text',required:true,full:true},{key:'objective',label:'Tujuan pembelajaran',type:'textarea',full:true},{key:'pages',label:'Jumlah halaman (jika relevan)',type:'number',min:1,max:50},{key:'cover',label:'Cover',type:'radio',options:['Ya, tambahkan','Tidak perlu','Tidak relevan']},{key:'productSpec',label:'Format & fungsi produk (wajib)',type:'textarea',required:true,full:true,placeholder:'Jelaskan format produk, komponen wajib, cara produk digunakan, dan elemen interaktif/visual yang dibutuhkan.'},{key:'notes',label:'Catatan khusus',type:'textarea',full:true}]
+};
+let activeModule=null,lastPrompt='',lastTitle='';
+const $=id=>document.getElementById(id);function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function show(id){['home','formView','resultView'].forEach(x=>$(x).classList.toggle('hidden',x!==id));window.scrollTo(0,0)}
+$('modulesGrid').innerHTML=modules.map(m=>`<button class="module" onclick="openModule('${m.id}')"><div class="emoji">${m.emoji}</div><h3>${m.name}</h3><p>${m.desc}</p></button>`).join('');
+function renderField(f){let id='f_'+f.key,html='';const label=`<label for="${id}">${esc(f.label)}${f.required?' <span class="required">*</span>':''}</label>`;
+if(f.type==='select'){html=`<select id="${id}" name="${f.key}" ${f.required?'required':''}>${(f.options||[]).map(o=>`<option>${esc(o)}</option>`).join('')}</select>`;if(f.other)html+=otherInput(f.other,f.otherLabel||'Tuliskan pilihan lainnya');}
+else if(f.type==='radio'||f.type==='checks'){html=`<div class="choices">${f.options.map((o,i)=>`<label class="choice"><input type="${f.type==='radio'?'radio':'checkbox'}" name="${f.key}" value="${esc(o)}" ${f.type==='radio'&&i===0?'checked':''}>${esc(o)}</label>`).join('')}</div>`;if(f.other)html+=otherInput(f.other,f.otherLabel||'Jelaskan pilihan lainnya');}
+else if(f.type==='file'){html=`<input id="${id}" name="${f.key}" type="file" ${f.multiple?'multiple':''} accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.jpg,.jpeg,.png,.webp">`;}
+else if(f.type==='textarea')html=`<textarea id="${id}" name="${f.key}" placeholder="${esc(f.placeholder||'Tulis di sini...')}" ${f.required?'required':''}></textarea>`;
+else html=`<input id="${id}" name="${f.key}" type="${f.type}" ${f.min?`min="${f.min}"`:''} ${f.max?`max="${f.max}"`:''} placeholder="${esc(f.placeholder||'Isi di sini')}" ${f.required?'required':''}>`;
+return `<div class="field ${f.full?'full':''}">${label}${html}</div>`}
+function otherInput(key,label){return `<div class="otherbox" id="box_${key}" style="display:none;margin-top:9px"><input id="f_${key}" name="${key}" placeholder="${esc(label)}"></div>`}
+function openModule(id){activeModule=modules.find(m=>m.id===id);$('modulePill').textContent=activeModule.name;$('formDesc').textContent=activeModule.desc;const globals=globalFields.filter(f=>!(id==='notes'&&f.key==='visualStyle'));$('fields').innerHTML=[...specs[id],...globals].map(renderField).join('');$('formTitle').textContent='Lengkapi spesifikasi prompt';$('moduleForm').reset();bindConditional();show('formView')}
+function bindConditional(){document.querySelectorAll('#fields select').forEach(sel=>sel.addEventListener('change',()=>{const f=[...specs[activeModule.id],...globalFields.filter(x=>!(activeModule.id==='notes'&&x.key==='visualStyle'))].find(x=>x.key===sel.name);if(f?.other){const box=$('box_'+f.other);if(box)box.style.display=sel.value==='Lainnya'?'block':'none'}}));document.querySelectorAll('#fields input[type=radio]').forEach(inp=>inp.addEventListener('change',()=>{const f=[...specs[activeModule.id],...globalFields.filter(x=>!(activeModule.id==='notes'&&x.key==='visualStyle'))].find(x=>x.key===inp.name);if(f?.other){const box=$('box_'+f.other);if(box)box.style.display=(inp.value.includes('Lainnya')||inp.value.includes('Kolom tambahan')||inp.value.includes('Tema berbeda'))?'block':'none'}}));document.querySelectorAll('#fields input[type=checkbox]').forEach(inp=>inp.addEventListener('change',()=>{const f=[...specs[activeModule.id],...globalFields.filter(x=>!(activeModule.id==='notes'&&x.key==='visualStyle'))].find(x=>x.key===inp.name);if(f?.other){const checked=[...document.querySelectorAll(`input[name="${inp.name}"]:checked`)].some(x=>x.value.includes('Lainnya'));const box=$('box_'+f.other);if(box)box.style.display=checked?'block':'none'}}))}
+function collect(){const out={module:activeModule.name};const all=[...specs[activeModule.id],...globalFields.filter(x=>!(activeModule.id==='notes'&&x.key==='visualStyle'))];for(const f of all){if(f.type==='file'){const el=$('f_'+f.key);out[f.key]=el?[...el.files].map(x=>x.name):[];continue}if(f.type==='checks'){out[f.key]=[...document.querySelectorAll(`input[name="${f.key}"]:checked`)].map(x=>x.value);continue}if(f.type==='radio'){out[f.key]=document.querySelector(`input[name="${f.key}"]:checked`)?.value||'';continue}out[f.key]=$('f_'+f.key)?.value||'';if(f.other&&$('f_'+f.other)?.value)out[f.other]=$('f_'+f.other).value}return out}
+$('moduleForm').addEventListener('submit',async e=>{e.preventDefault();const data=collect();const btn=$('generateBtn');btn.disabled=true;btn.textContent='Menyusun prompt universal...';try{const r=await fetch('/.netlify/functions/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Permintaan gagal.');if(!j.prompt||typeof j.prompt!=='string')throw new Error('Server belum mengembalikan prompt.');lastPrompt=j.prompt;lastTitle=(data.productName||data.topic||activeModule.name)+' — '+activeModule.name;$('resultTitle').textContent=lastTitle;$('promptResult').value=lastPrompt;$('resultStatus').textContent='Prompt berhasil dibuat';show('resultView')}catch(err){alert('Prompt belum berhasil dibuat.\n\n'+err.message+'\n\nPastikan GEMINI_API_KEY tersedia di Netlify dan deploy terbaru sudah aktif.')}finally{btn.disabled=false;btn.textContent='Buat Prompt Universal'}});
+function copyPrompt(){const el=$('promptResult');el.select();el.setSelectionRange(0,el.value.length);if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(el.value).then(()=>alert('Prompt berhasil disalin.')).catch(()=>alert('Teks sudah dipilih. Tekan lama lalu pilih Salin.'));else alert('Teks sudah dipilih. Tekan lama lalu pilih Salin.')}
+function downloadPrompt(){const blob=new Blob([$('promptResult').value],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');const u=URL.createObjectURL(blob);a.href=u;a.download='DIGIORA_Universal_Prompt.txt';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function historyRead(){try{return JSON.parse(localStorage.getItem('digiora_prompt_history')||'[]')}catch(e){return []}}
+function savePrompt(){const h=historyRead();h.push({id:Date.now(),title:lastTitle,prompt:$('promptResult').value,created:new Date().toLocaleString('id-ID')});localStorage.setItem('digiora_prompt_history',JSON.stringify(h.slice(-100)));alert('Prompt disimpan di riwayat browser ini.');renderHistory()}
+function renderHistory(){const h=historyRead().slice().reverse();$('history').innerHTML=h.length?h.map(x=>`<div class="history-item"><b>${esc(x.title)}</b><div class="muted">${esc(x.created)}</div><div class="actions"><button class="btn light" onclick="openHistory(${x.id})">Buka</button><button class="btn light" onclick="deleteHistory(${x.id})">Hapus</button></div></div>`).join(''):'<p class="muted">Belum ada prompt tersimpan.</p>'}
+function openHistory(id){const x=historyRead().find(a=>a.id===id);if(!x)return;lastTitle=x.title;$('resultTitle').textContent=x.title;$('promptResult').value=x.prompt;$('resultStatus').textContent='Prompt dari riwayat';show('resultView')}
+function deleteHistory(id){if(!confirm('Hapus prompt ini dari riwayat?'))return;localStorage.setItem('digiora_prompt_history',JSON.stringify(historyRead().filter(x=>x.id!==id)));renderHistory()}
+function exportHistory(){const blob=new Blob([JSON.stringify(historyRead(),null,2)],{type:'application/json'});const a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download='DIGIORA_prompt_history.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function goHome(){renderHistory();show('home')}renderHistory();
+</script></body></html>
