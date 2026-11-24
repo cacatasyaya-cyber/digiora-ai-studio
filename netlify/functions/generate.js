@@ -1,4 +1,4 @@
-const MODEL = "gemini-3.8-flash";
+const MODEL = "gemini-3.5-flash-lite";
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") return json(405, { error: "Metode tidak diizinkan." });
