@@ -45,26 +45,75 @@ Berikan satu prompt utuh dengan judul dan bagian terstruktur. Akhiri prompt deng
 
 DATA FORM PENGGUNA:
 ${serialized}`;
+  
   try {
-    const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-      body: JSON.stringify({
-        contents: [{ role: "user", parts: [{ text: instruction }] }],
-        generationConfig: { temperature: 0.45, maxOutputTokens: 8192 }
-      })
-    });
-    const result = await apiResponse.json().catch(() => ({}));
-    if (!apiResponse.ok) {
-      const message = result?.error?.message || `Gemini API merespons HTTP ${apiResponse.status}.`;
-      return json(apiResponse.status === 429 ? 429 : 502, { error: message });
+    let apiResponse;
+    let result;
+
+    for (let attempt = 0; attempt < 3; attempt++) {
+      apiResponse = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": apiKey
+          },
+          body: JSON.stringify({
+            contents: [
+              { role: "user", parts: [{ text: instruction }] }
+            ],
+            generationConfig: {
+              temperature: 0.45,
+              maxOutputTokens: 8192
+            }
+          })
+        }
+      );
+
+      result = await apiResponse.json().catch(() => ({}));
+
+      if (apiResponse.ok) break;
+
+      const retryable = [429, 500, 502, 503, 504].includes(
+        apiResponse.status
+      );
+
+      if (!retryable || attempt === 2) {
+        const message =
+          result?.error?.message ||
+          `Gemini API merespons HTTP ${apiResponse.status}.`;
+
+        return json(
+          apiResponse.status === 429 ? 429 : 502,
+          { error: message }
+        );
+      }
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 1500 * (attempt + 1))
+      );
     }
-    const prompt = result?.candidates?.[0]?.content?.parts?.map(p => p.text || "").join("").trim();
-    if (!prompt) return json(502, { error: "AI mengembalikan jawaban kosong. Silakan coba lagi." });
+
+    const prompt = result?.candidates?.[0]?.content?.parts
+      ?.map(p => p.text || "")
+      .join("")
+      .trim();
+
+    if (!prompt) {
+      return json(502, {
+        error: "AI mengembalikan jawaban kosong. Silakan coba lagi."
+      });
+    }
+
     return json(200, { prompt, model: MODEL });
+
   } catch (error) {
-    return json(502, { error: "Tidak dapat menghubungi layanan AI. Periksa koneksi dan coba lagi." });
+    return json(502, {
+      error: "Tidak dapat menghubungi layanan AI. Periksa koneksi dan coba lagi."
+    });
   }
+
 };
 function clean(value, max) { return String(value == null ? "" : value).replace(/[<>]/g, "").slice(0, max); }
 function json(statusCode, body) { return { statusCode, headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" }, body: JSON.stringify(body) }; }
