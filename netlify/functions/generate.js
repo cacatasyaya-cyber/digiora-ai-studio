@@ -1,5 +1,4 @@
-const MODEL = "gemini-2.5-flash-lite";
-
+const MODEL = "gemini-3.5-flash-lite";
 exports.handler = async (event) => {
   const json = (statusCode, body) => ({
     statusCode,
