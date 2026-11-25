@@ -109,29 +109,45 @@ KELUARKAN MASTER PROMPT FINAL SAJA.
 `;
 
   try {
-    const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/" +
-        MODEL +
-        ":generateContent?key=" +
-        encodeURIComponent(apiKey),
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: instruction }]
-            }
-          ],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 8192
+let response;
+
+for (let attempt = 0; attempt < 4; attempt++) {
+  response = await fetch(
+    "https://generativelanguage.googleapis.com/v1beta/models/" +
+    MODEL +
+    ":generateContent?key=" +
+    encodeURIComponent(apiKey),
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [{ text: instruction }]
           }
-        })
-      }
-    );
+        ],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 8192
+        }
+      })
+    }
+  );
+
+  if (
+    response.ok ||
+    ![429, 500, 502, 503, 504].includes(response.status) ||
+    attempt === 3
+  ) {
+    break;
+  }
+
+  await new Promise(resolve =>
+    setTimeout(resolve, 1000 * (2 ** attempt))
+  );
+}
 
     const data = await response.json();
 
